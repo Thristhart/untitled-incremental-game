@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "react",
+    "rootDir": "./src",
+    "incremental": true,
+    "experimentalDecorators": true,
+    "lib": ["dom", "es2015"],
+    "baseUrl": "./src",
+    "paths": {
+      "@features/*": ["features/*"],
+      "@store/*": ["store/*"]
+    }
+  }
+}
