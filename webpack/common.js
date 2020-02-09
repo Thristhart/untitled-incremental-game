@@ -45,7 +45,7 @@ const createConfig = (env, argv) => ({
       },
       {
         test: /\.ink$/,
-        loader: path.join(ROOT_PATH, "webpack-config", "ink", "ink-loader.js")
+        loader: path.join(ROOT_PATH, "webpack", "ink", "ink-loader.js")
       }
     ]
   },
