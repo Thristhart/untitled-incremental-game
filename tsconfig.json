@@ -13,6 +13,7 @@
     "types": [],
     "baseUrl": "./src",
     "paths": {
+      "@controls/*": ["controls/*"],
       "@features/*": ["features/*"],
       "@store/*": ["store/*"],
       "@ink/*": ["ink/*"]

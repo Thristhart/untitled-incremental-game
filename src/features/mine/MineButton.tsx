@@ -1,3 +1,4 @@
+import { Button } from "@controls/Button";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import mine from ".";
@@ -10,5 +11,5 @@ export const MineButton = () => {
 
   const rocks = useSelector(selectRocks);
 
-  return <button onClick={onPress}>⛏ {rocks}</button>;
+  return <Button onClick={onPress}>⛏ {rocks}</Button>;
 };
