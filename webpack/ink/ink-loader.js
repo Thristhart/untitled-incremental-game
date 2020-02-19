@@ -15,7 +15,7 @@ module.exports = function loader(source) {
   );
 
   child_process.exec(
-    `${path.join(__dirname, "inklecate.exe")} ${targetPath}`,
+    `${path.join(__dirname, "inklecate")} ${targetPath}`,
     (err, stdout) => {
       if (err) {
         return callback(err);
