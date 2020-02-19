@@ -10,10 +10,13 @@
     "incremental": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2015"],
+    "types": [],
     "baseUrl": "./src",
     "paths": {
+      "@controls/*": ["controls/*"],
       "@features/*": ["features/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@ink/*": ["ink/*"]
     }
   }
 }

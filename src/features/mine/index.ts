@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AppThunk } from "@store/models";
 
-export const mine = createSlice({
+const mine = createSlice({
   name: "mine",
   initialState: {
     rocks: 0
@@ -12,10 +11,9 @@ export const mine = createSlice({
     },
     decrementRock(state) {
       state.rocks--;
-    }
+    },
+    dig: state => state
   }
 });
 
-export const digAtMine = (): AppThunk => async dispatch => {
-  dispatch(mine.actions.incrementRock());
-};
+export default mine;
