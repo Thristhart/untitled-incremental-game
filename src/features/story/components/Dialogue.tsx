@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { DialogueBeat } from "./storyModels";
+import { DialogueBeat } from "../storyModels";
 
 const DialogueContainer = styled.li`
-  height: 240px;
+  height: 12rem;
 
   margin-left: 2rem;
   margin-right: 2rem;
