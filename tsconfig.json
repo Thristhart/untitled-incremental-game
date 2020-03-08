@@ -16,7 +16,8 @@
       "@controls/*": ["controls/*"],
       "@features/*": ["features/*"],
       "@store/*": ["store/*"],
-      "@ink/*": ["ink/*"]
+      "@ink/*": ["ink/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }

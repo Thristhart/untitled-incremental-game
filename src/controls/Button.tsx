@@ -8,6 +8,8 @@ export const Button = styled.button`
   padding: 0.4rem;
   outline: none;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
 
   &:active {
     transform: scale(0.9);
@@ -15,5 +17,11 @@ export const Button = styled.button`
   }
   &:focus {
     box-shadow: 0 0 0 0.1rem #ffffff, 0 0 0.2rem 0.3rem #3a97f9;
+  }
+  &:disabled {
+    opacity: 0.6;
+    filter: grayscale();
+    color: black;
+    box-shadow: none;
   }
 `;

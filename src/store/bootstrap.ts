@@ -1,4 +1,4 @@
-import { mineSaga } from "@features/mine/mineSaga";
+import { apprenticeshipSaga } from "@features/apprenticeship/apprenticeshipSaga";
 import { history } from "@features/navigation/history";
 import storySlice from "@features/story";
 import { storySaga } from "@features/story/storySaga";
@@ -18,7 +18,7 @@ export const store = configureStore({
   ]
 });
 
-const sagas = [storySaga, mineSaga];
+const sagas = [storySaga, apprenticeshipSaga];
 
 sagas.forEach(saga => {
   sagaMiddleware.run(saga);

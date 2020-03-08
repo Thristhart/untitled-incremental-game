@@ -1,4 +1,4 @@
-import { MineButton } from "@features/mine/MineButton";
+import { Apprenticeship } from "@features/apprenticeship/Apprenticeship";
 import { history } from "@features/navigation/history";
 import { ConnectedRouter } from "connected-react-router";
 import * as React from "react";
@@ -9,7 +9,7 @@ export const RouteMapping = () => {
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/">
-          <MineButton />
+          <Apprenticeship />
         </Route>
       </Switch>
     </ConnectedRouter>
