@@ -1,4 +1,4 @@
-INCLUDE mine.ink
+INCLUDE apprenticeship.ink
 
 -> mine_test ->
 
