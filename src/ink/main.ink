@@ -1,5 +1,6 @@
+INCLUDE intro.ink
 INCLUDE apprenticeship.ink
 
--> mine_test ->
+-> intro ->
 
 -> END

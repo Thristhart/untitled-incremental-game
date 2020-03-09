@@ -25,14 +25,14 @@ export const Water = () => {
 
   let buckets: JSX.Element[] = [];
   if (waterAmount === 0) {
-    buckets.push(<WaterLabel>None</WaterLabel>);
+    buckets.push(<WaterLabel key="none">None</WaterLabel>);
   } else if (waterAmount < 5) {
     for (let i = 0; i < waterAmount; i++) {
       buckets.push(<Bucket src={bucket_image_url} key={i} />);
     }
   } else {
     buckets.push(<Bucket src={bucket_image_url} key={"label"} />);
-    buckets.push(<WaterLabel>x {waterAmount}</WaterLabel>);
+    buckets.push(<WaterLabel key="amount">x {waterAmount}</WaterLabel>);
   }
 
   return (

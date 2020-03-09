@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export default createSlice({
   name: "apprenticeship",
   initialState: {
+    isApprentice: false,
     water: 0,
     filth: 10
   },
@@ -19,6 +20,11 @@ export default createSlice({
     removeFilth(state, action: PayloadAction<{ filthToRemove: number }>) {
       state.filth += action.payload.filthToRemove;
     },
-    mop: state => state
+    beginApprenticeship(state) {
+      state.isApprentice = true;
+    },
+    setIsApprentice(state, action: PayloadAction<{ isApprentice: boolean }>) {
+      state.isApprentice = action.payload.isApprentice;
+    }
   }
 });

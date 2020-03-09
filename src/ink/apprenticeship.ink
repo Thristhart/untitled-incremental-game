@@ -1,5 +1,5 @@
-=== mine_test ===
-It's a mine. Press the button to make the number bigger.
+=== apprenticeship ===
+Clean up in here.
 Oh, clicking the dialogue instead, huh?
 There's going to be some words here, for sure.
 Eventually, there will be character art, and writing, and stuff like that.
