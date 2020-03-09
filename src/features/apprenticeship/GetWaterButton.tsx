@@ -1,60 +1,49 @@
 import { Button } from "@controls/Button";
-import { Sprite } from "@controls/Sprite";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import verbs from "@features/verbs";
+import { Verbs } from "@features/verbs/verbModels";
+import { selectIsVerbing } from "@features/verbs/verbSelectors";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import apprenticeship from ".";
-import well_spritesheet_url from "./assets/well_sheet.png";
-
-const Well = styled(Sprite)`
-  min-width: 128px;
-  min-height: 128px;
-  max-width: 128px;
-  max-height: 128px;
-  background-size: ${128 * 20}px;
-  image-rendering: pixelated;
-`;
 
 const WellButton = styled(Button)`
-  background-color: #81e6d3;
+  background-color: #8f563b;
   flex-direction: row;
-
-  &:disabled {
-    filter: none;
-    opacity: 1;
-  }
+  color: white;
 `;
 
 const WellContainer = styled.div`
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 interface GetWaterButtonProps {
   readonly className?: string;
 }
 
+function fetchWater() {
+  return verbs.actions.startVerb({
+    type: Verbs.FetchWater,
+    duration: 8000,
+    startTime: performance.now()
+  });
+}
+
 export const GetWaterButton = (props: GetWaterButtonProps) => {
   const dispatch = useDispatch();
 
-  const [waterProgress, setWaterProgress] = useState(0);
+  const isVerbing = useSelector(selectIsVerbing);
 
   const onPress = () => {
-    setWaterProgress(prog => prog + 1);
+    dispatch(fetchWater());
   };
-
-  useEffect(() => {
-    if (waterProgress >= 40) {
-      setWaterProgress(0);
-      dispatch(apprenticeship.actions.addWater({ additionalWater: 1 }));
-    }
-  }, [waterProgress]);
-
-  const frame = waterProgress <= 19 ? waterProgress : 39 - waterProgress;
 
   return (
     <WellContainer className={props.className}>
-      <Well url={well_spritesheet_url} frameWidth={128} frame={frame} />
-      <WellButton onClick={onPress}>operate well</WellButton>
+      <WellButton onClick={onPress} disabled={isVerbing}>
+        operate well
+      </WellButton>
     </WellContainer>
   );
 };

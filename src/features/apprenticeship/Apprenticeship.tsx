@@ -7,7 +7,7 @@ import { Water } from "./Water";
 const ApprenticeshipContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 6rem;
 `;
 
 const Well = styled(GetWaterButton)`

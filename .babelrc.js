@@ -3,6 +3,9 @@ module.exports = api => {
 
   return {
     presets: ["@babel/react", "@babel/typescript", "@babel/env"],
-    plugins: [api.env("development") && "react-refresh/babel"].filter(Boolean)
+    plugins: [
+      api.env("development") && "react-refresh/babel",
+      "babel-plugin-styled-components"
+    ].filter(Boolean)
   };
 };
