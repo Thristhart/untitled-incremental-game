@@ -1,5 +1,5 @@
 === intro ===
-Hey, click me.
+Hey, click me, Chungus.
 I'm introductory dialogue.
 master: Someone will talk to you and explain being an apprentice.
 master: Once you're done being explained to, this action will enable the apprentice UI.
