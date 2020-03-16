@@ -17,10 +17,21 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1.0.0
+      - name: Copy via ssh
+        uses: garygrossgarten/github-action-scp@v0.5.3
         with:
-          # Artifact name
-          name: ${{ github.head_ref	}}-${{ github.sha }}
-          # Directory containing files to upload
-          path: ./build
+          # Path to the local folder you want to copy.
+          local: ./dist
+          # Path on the remote server to copy to.
+          remote: /srv/http/tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
+          # Hostname or IP address of the server.
+          host: ${{ secrets.PR_DEPLOY_HOST }} # optional, default is localhost
+          # Username for authentication.
+          username: ${{ secrets.PR_DEPLOY_USER }}
+          # File Location or string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
+          privateKey: ${{ secrets.PR_DEPLOY_SSH_KEY }}
+      - name: PR Comment	
+        uses: github-actions-up-and-running/pr-comment@v1.0.0	
+        with:	
+          repo-token: ${{ secrets.GITHUB_TOKEN }}	
+          message: View the latest successful build at https://tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
