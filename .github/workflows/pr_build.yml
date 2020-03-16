@@ -17,22 +17,10 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm run build
-      - name: ssh deploy
-        uses: easingthemes/ssh-deploy@v2.0.8
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
         with:
-          # Private Key
-          SSH_PRIVATE_KEY: ${{ secrets.PR_DEPLOY_SSH_KEY }}
-          # Remote host
-          REMOTE_HOST: ${{ secrets.PR_DEPLOY_HOST }}
-          # Remote user
-          REMOTE_USER: ${{ secrets.PR_DEPLOY_USER }}
-          # Source directory
-          SOURCE: ./build
-          # Target directory
-          TARGET: /srv/http/tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
-          
-      - name: PR Comment
-        uses: github-actions-up-and-running/pr-comment@v1.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: View the latest successful build at https://tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
+          # Artifact name
+          name: ${{ github.head_ref	}}/${{ github.sha }}
+          # Directory containing files to upload
+          path: ./build
