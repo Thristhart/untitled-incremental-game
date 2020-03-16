@@ -21,7 +21,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@v0.5.3
         with:
           # Path to the local folder you want to copy.
-          local: ./dist
+          local: ./build
           # Path on the remote server to copy to.
           remote: /srv/http/tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
           # Hostname or IP address of the server.
