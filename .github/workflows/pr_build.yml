@@ -30,6 +30,7 @@ jobs:
           username: ${{ secrets.PR_DEPLOY_USER }}
           # File Location or string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
           privateKey: ${{ secrets.PR_DEPLOY_SSH_KEY }}
+          recursive: true
       - name: PR Comment	
         uses: github-actions-up-and-running/pr-comment@v1.0.0	
         with:	
