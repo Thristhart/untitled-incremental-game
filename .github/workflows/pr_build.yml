@@ -21,6 +21,6 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           # Artifact name
-          name: ${{ github.head_ref	}}/${{ github.sha }}
+          name: ${{ github.head_ref	}}-${{ github.sha }}
           # Directory containing files to upload
           path: ./build
