@@ -17,7 +17,13 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm run build
-      - run: mkdir -p deploy/${{ github.head_ref	}}; mv build/* deploy/${{ github.head_ref	}}
+      - run: echo ${{ secrets.PR_DEPLOY_SSH_KEY }} > pr_deploy_ssh_key
+      - env:
+          GIT_SSH_COMMAND: ssh -i pr_deploy_ssh_key
+      - run: |
+          git clone git@github.com:Thristhart/untitled-incremental-game-pr-builds.git
+          
+      - run: untitled-incremental-game-pr-builds/${{ github.head_ref	}}; mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref	}}
       - name: Deploy to PR build repo GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
