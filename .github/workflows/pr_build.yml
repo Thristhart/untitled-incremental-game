@@ -17,13 +17,12 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm run build
-      - run: cd build/; mkdir ${{ github.head_ref	}}; mv * -t ${{ github.head_ref	}}
-        shell: bash --noprofile --norc {0}
+      - run: mkdir -p deploy/${{ github.head_ref	}}; mv build/* deploy/${{ github.head_ref	}}
       - name: Deploy to PR build repo GH Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.PR_DEPLOY_SSH_KEY }}
-          publish_dir: ./build
+          publish_dir: ./deploy
           publish_branch: master
           external_repository: thristhart/untitled-incremental-game-pr-builds
       - name: PR Comment	
