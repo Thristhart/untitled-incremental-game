@@ -20,17 +20,15 @@ jobs:
       - run: echo ${{ secrets.PR_DEPLOY_SSH_KEY }} > pr_deploy_ssh_key
       - env:
           GIT_SSH_COMMAND: ssh -i pr_deploy_ssh_key
-      - run: |
+        
+      - name: git clone and deploy
+        run: |
           git clone git@github.com:Thristhart/untitled-incremental-game-pr-builds.git
-          
-      - run: untitled-incremental-game-pr-builds/${{ github.head_ref	}}; mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref	}}
-      - name: Deploy to PR build repo GH Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.PR_DEPLOY_SSH_KEY }}
-          publish_dir: ./deploy
-          publish_branch: master
-          external_repository: thristhart/untitled-incremental-game-pr-builds
+          mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref	}}
+          cd untitled-incremental-game-pr-builds
+          git add ${{ github.head_ref	}}
+          git commit -m "deploy PR build for ${{ github.head_ref	}}"
+          git push
       - name: PR Comment	
         uses: github-actions-up-and-running/pr-comment@v1.0.0	
         with:	
