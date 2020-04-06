@@ -18,6 +18,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: echo "${{ secrets.PR_DEPLOY_SSH_KEY }}" > pr_deploy_ssh_key
+      - run: chmod 600 pr_deploy_ssh_key
         
       - name: git clone and deploy
         env:
