@@ -18,10 +18,10 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: echo ${{ secrets.PR_DEPLOY_SSH_KEY }} > pr_deploy_ssh_key
-      - env:
-          GIT_SSH_COMMAND: ssh -i pr_deploy_ssh_key
         
       - name: git clone and deploy
+        env:
+          GIT_SSH_COMMAND: ssh -i pr_deploy_ssh_key
         run: |
           git clone git@github.com:Thristhart/untitled-incremental-game-pr-builds.git
           mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref	}}
