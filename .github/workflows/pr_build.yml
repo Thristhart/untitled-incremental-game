@@ -30,8 +30,7 @@ jobs:
           mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref }}
           cd untitled-incremental-game-pr-builds
           git add ${{ github.head_ref }}
-          git commit -m "deploy PR build for ${{ github.head_ref }}"
-          git push
+          git diff-index --quiet HEAD || (git commit -m "deploy PR build for ${{ github.head_ref }}" && git push)
       - name: PR Comment	
         uses: github-actions-up-and-running/pr-comment@v1.0.0	
         with:	
