@@ -32,7 +32,7 @@ jobs:
           git add ${{ github.head_ref }}
           git diff-index --quiet HEAD || (git commit -m "deploy PR build for ${{ github.head_ref }}" && git push)
       - name: PR Comment	
-        uses: github-actions-up-and-running/pr-comment@v1.0.0	
-        with:	
-          repo-token: ${{ secrets.GITHUB_TOKEN }}	
+        uses: thollander/actions-comment-pull-request@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}	
           message: View the latest successful build at https://thristhart.github.io/untitled-incremental-game-pr-builds/${{ github.head_ref	}}/
