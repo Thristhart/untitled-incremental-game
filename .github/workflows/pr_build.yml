@@ -26,6 +26,7 @@ jobs:
         run: |
           git clone git@github.com:Thristhart/untitled-incremental-game-pr-builds.git
           rm -rf untitled-incremental-game-pr-builds/${{ github.head_ref }}
+          mkdir -p untitled-incremental-game-pr-builds/${{ github.head_ref }}
           mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref }}
           cd untitled-incremental-game-pr-builds
           git add ${{ github.head_ref }}
