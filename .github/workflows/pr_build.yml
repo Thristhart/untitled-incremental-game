@@ -31,8 +31,14 @@ jobs:
           cd untitled-incremental-game-pr-builds
           git add ${{ github.head_ref }}
           git diff-index --quiet HEAD || (git commit -m "deploy PR build for ${{ github.head_ref }}" && git push)
-      - name: PR Comment	
-        uses: thollander/actions-comment-pull-request@master
+  comment:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}	
-          message: View the latest successful build at https://thristhart.github.io/untitled-incremental-game-pr-builds/${{ github.head_ref	}}/
+          msg: View the latest successful build at https://thristhart.github.io/untitled-incremental-game-pr-builds/${{ github.head_ref	}}/
+          check_for_duplicate_msg: true
