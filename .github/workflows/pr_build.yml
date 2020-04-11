@@ -17,22 +17,28 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npm run build
-      - name: ssh deploy
-        uses: easingthemes/ssh-deploy@v2.0.8
+      - run: echo "${{ secrets.PR_DEPLOY_SSH_KEY }}" > pr_deploy_ssh_key
+      - run: chmod 600 pr_deploy_ssh_key
+        
+      - name: git clone and deploy
+        env:
+          GIT_SSH_COMMAND: ssh -i pr_deploy_ssh_key -o "StrictHostKeyChecking=no"
+        run: |
+          git clone git@github.com:Thristhart/untitled-incremental-game-pr-builds.git
+          rm -rf untitled-incremental-game-pr-builds/${{ github.head_ref }}
+          mkdir -p untitled-incremental-game-pr-builds/${{ github.head_ref }}
+          mv build/* untitled-incremental-game-pr-builds/${{ github.head_ref }}
+          cd untitled-incremental-game-pr-builds
+          git add ${{ github.head_ref }}
+          git diff-index --quiet HEAD || (git commit -m "deploy PR build for ${{ github.head_ref }}" && git push)
+  comment:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Private Key
-          SSH_PRIVATE_KEY: ${{ secrets.PR_DEPLOY_SSH_KEY }}
-          # Remote host
-          REMOTE_HOST: ${{ secrets.PR_DEPLOY_HOST }}
-          # Remote user
-          REMOTE_USER: ${{ secrets.PR_DEPLOY_USER }}
-          # Source directory
-          SOURCE: ./build
-          # Target directory
-          TARGET: /srv/http/tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
-          
-      - name: PR Comment
-        uses: github-actions-up-and-running/pr-comment@v1.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: View the latest successful build at https://tom.shea.at/untitled_incremental_game/pr/${{ github.head_ref	}}/${{ github.sha }}
+          msg: View the latest successful build at https://thristhart.github.io/untitled-incremental-game-pr-builds/${{ github.head_ref	}}/
+          check_for_duplicate_msg: true
